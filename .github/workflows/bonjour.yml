@@ -7,5 +7,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: ls -l # Liste les fichier du répertoire courant
-      - run: apt-get install cowsay 
+      - run: sudo apt-get install cowsay 
       - run: cat README.md | cowsay  # Affiche le contenu du fichier `README.md` à la base du dépôt
