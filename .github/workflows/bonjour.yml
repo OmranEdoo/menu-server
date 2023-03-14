@@ -5,11 +5,21 @@ jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
-      - uses: juliangruber/read-file-action@v1
-        id: readfile
+      - name: Checkout code
+        uses: actions/checkout@v3 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
+      - name: Setup jdk
+        uses: actions/setup-java@v3
         with:
-          path: ./README.md
-      - uses: Code-Hex/neo-cowsay-action@v1
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
         with:
-          message: "${{ steps.readfile.outputs.content }}"
+          maven-version: 3.8.2
+      - run: java HelloWorldApp.java
+      - name: Check la version de maven
+        run: mvn -v
+      - name: Maven Package
+        run: mvn package
+      - name: Maven Compile
+        run: mvn compile
