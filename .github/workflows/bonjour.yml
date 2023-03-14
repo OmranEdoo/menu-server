@@ -16,7 +16,6 @@ jobs:
         uses: stCarolas/setup-maven@v4.5
         with:
           maven-version: 3.8.2
-      - run: java HelloWorldApp.java
       - name: Check la version de maven
         run: mvn -v
       - name: Maven Package
